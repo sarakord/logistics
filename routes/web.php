@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('admin')->namespace('Admin')->group(function (){
+    route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
 });

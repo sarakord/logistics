@@ -17,6 +17,8 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $persianFaker = Faker\Factory::create('fa_IR');
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
