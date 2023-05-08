@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\ConsignmentController;
+use App\Http\Controllers\Admin\MotorcycleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,5 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->namespace('Admin')->group(function (){
     route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
-    route::resource('/city', \App\Http\Controllers\Admin\CityController::class);
+    route::resource('/city', CityController::class);
+    route::resource('/motorcycle', MotorcycleController::class);
+    route::resource('/consignment', ConsignmentController::class);
+});
+
+Route::get('/test', function () {
+    \App\Models\Motorcycle::factory()->count(5)->create();
 });

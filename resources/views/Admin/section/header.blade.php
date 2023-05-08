@@ -12,8 +12,7 @@
             <ul class="list-group p-0">
                 <li class="py-3 bg-light list-group-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li class="py-3 bg-light list-group-item"><a href="{{ route('city.index') }}">Cities</a></li>
-                <li class="py-3 bg-light list-group-item">A third item</li>
-                <li class="py-3 bg-light list-group-item">A fourth item</li>
-                <li class="py-3 bg-light list-group-item">And a fifth one</li>
+                <li class="py-3 bg-light list-group-item"><a href="{{ route('motorcycle.index') }}">Motorcycle</a></li>
+                <li class="py-3 bg-light list-group-item"><a href="{{ route('consignment.index') }}">Consignment</a></li>
             </ul>
         </div>
