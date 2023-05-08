@@ -11,6 +11,7 @@
         <div class="col-sm-3 col-md-2 sidebar bg-light p-0">
             <ul class="list-group p-0">
                 <li class="py-3 bg-light list-group-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                <li class="py-3 bg-light list-group-item"><a href="{{ route('user.index') }}">users</a></li>
                 <li class="py-3 bg-light list-group-item"><a href="{{ route('city.index') }}">Cities</a></li>
                 <li class="py-3 bg-light list-group-item"><a href="{{ route('motorcycle.index') }}">Motorcycle</a></li>
                 <li class="py-3 bg-light list-group-item"><a href="{{ route('consignment.index') }}">Consignment</a></li>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ConsignmentController;
 use App\Http\Controllers\Admin\MotorcycleController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,7 @@ Route::prefix('admin')->namespace('Admin')->group(function (){
     route::resource('/city', CityController::class);
     route::resource('/motorcycle', MotorcycleController::class);
     route::resource('/consignment', ConsignmentController::class);
+    route::resource('/user', UserController::class);
 });
 
 Route::get('/test', function () {
