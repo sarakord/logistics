@@ -47,7 +47,7 @@ class CitySeeder extends Seeder
                 'name' => $city,
                 'is_active' => true,
             ]);
-            Downtown::craete(array_merge($downtown, ['city_id' => $city->id]));
+            Downtown::create(array_merge($downtown, ['city_id' => $city->id]));
         }
     }
 }
