@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ConsignmentRequest;
+use App\Models\Consignment;
+use App\Models\Motorcycle;
 use App\Repositories\ConsignmentRepository;
 use Illuminate\Http\Request;
 
@@ -17,39 +20,33 @@ class ConsignmentController extends Controller
 
     public function index()
     {
-        $motorcycles = $this->repository->paginate(5);
-        return view('Admin.motorcycle.index', [
-            'motorcycles' => $motorcycles,
+        $consignments = $this->repository->paginate(5);
+        return view('Admin.consignment.index', [
+            'consignments' => $consignments,
         ]);
     }
 
     public function create()
     {
-        return view('Admin.motorcycle.createOrEdit');
+        return view('Admin.consignment.createOrEdit');
     }
 
-    public function store(MotorcycleRequest $request)
+    public function edit(Consignment $consignment)
     {
-        $city = $this->repository->create($request->all());
-
-        return redirect()->route('motorcycle.index')->with('success', 'Saved successfully');
+        $motorcycles = Motorcycle::active()->where('city_id', $consignment->customer?->city_id)->get();
+        return view('Admin.consignment.createOrEdit', compact('consignment', 'motorcycles'));
     }
 
-    public function edit(Motorcycle $motorcycle)
+    public function update(ConsignmentRequest $request, Consignment $consignment)
     {
-        return view('Admin.motorcycle.createOrEdit', compact('motorcycle'));
+        $this->repository->update($consignment, $request->all());
+
+        return redirect()->route('consignment.index')->with('success', 'Edited successfully');
     }
 
-    public function update(MotorcycleRequest $request, Motorcycle $motorcycle)
+    public function destroy(Consignment $consignment)
     {
-        $this->repository->update($motorcycle, $request->all());
-
-        return redirect()->route('motorcycle.index')->with('success', 'Edited successfully');
-    }
-
-    public function destroy(Motorcycle $motorcycle)
-    {
-        $this->repository->delete($motorcycle);
-        return redirect()->route('motorcycle.index')->with('success', 'Deleted successfully');
+        $this->repository->delete($consignment);
+        return redirect()->route('consignment.index')->with('success', 'Deleted successfully');
     }
 }

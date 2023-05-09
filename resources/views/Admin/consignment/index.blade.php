@@ -3,8 +3,7 @@
 @section('content')
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <div class="page-header head-section">
-            <h2>Users</h2>
-            <p><a href="{{ route('user.create') }}" class="btn btn-primary">Add new user </a></p>
+            <h2>Consignment</h2>
         </div>
         <div class="table-responsive">
             <table class="table table-bordered text-center table-striped">
@@ -12,35 +11,31 @@
                 <tr>
                     <th>name</th>
                     <th>city</th>
-                    <th>address</th>
-                    <th>email</th>
+                    <th>driver</th>
+                    <th>status</th>
                     <th>actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($users as $user)
+                @foreach($consignments as $consignment)
                     <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->city?->name }}</td>
-                        <td>{{ $user->address }}</td>
-                        <td>{{ $user->email }}</td>
+                        <td>{{ $consignment->customer?->name }}</td>
+                        <td>{{ $consignment->city }}</td>
+                        <td>{{ $consignment->motorcycle?->driver }}</td>
+                        <td>{{ config('consignment.status')[$consignment->status] }}</td>
                         <td>
                             <div class="row justify-content-center">
-                                <form class="w-auto mx-2 formDelete" action="{{route('user.destroy' , $user)}}" method="post">
+                                <form class="w-auto mx-2 formDelete" action="{{route('consignment.destroy' , $consignment)}}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="button" class="btn-sm btn-danger alert_type">Delete</button>
                                 </form>
-                                <a href="{{ route('user.edit', $user) }}" class="btn-sm btn-warning w-auto">Edit</a>
-                                <form class="w-auto mx-2" action="{{ route('user.consignment.store', ['user' =>  $user]) }}" method="post">
-                                    @csrf
-                                    <button type="submit" class="btn-sm btn-primary">create consignment</button>
-                                </form>
+                                <a href="{{ route('consignment.edit', $consignment) }}" class="btn-sm btn-warning w-auto">Edit</a>
                             </div>
                         </td>
                     </tr>
                 @endforeach
-                {{ $users->links() }}
+                {{ $consignments->links() }}
                 </tbody>
             </table>
         </div>

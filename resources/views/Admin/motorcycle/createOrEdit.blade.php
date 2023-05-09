@@ -34,6 +34,14 @@
                                        aria-describedby="license_plate"
                                        value="{{ $motorcycle->license_plate ?? old('license_plate') }}">
                             </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">city</label>
+                                <select class="form-select" name="city_id" aria-label="Default select example">
+                                    @foreach($cities as $city)
+                                        <option value="{{ $city->id }}" {{ (isset($motorcycle) && $motorcycle->city_id == $city->id) ? 'selected':'' }}>{{ $city->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="form-check col-2">
                                 <input type="hidden" name="in_downtown" value="0">
                                 <input class="form-check-input" name="in_downtown" type="checkbox" value="1"

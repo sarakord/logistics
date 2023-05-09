@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Motorcycle;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,8 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        $this->call(CitySeeder::class);
+        $this->call(CitySeeder::class);
         $this->call(UserSeeder::class);
+        Motorcycle::factory(10)->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

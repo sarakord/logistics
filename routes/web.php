@@ -23,6 +23,7 @@ Route::prefix('admin')->namespace('Admin')->group(function (){
     route::resource('/motorcycle', MotorcycleController::class);
     route::resource('/consignment', ConsignmentController::class);
     route::resource('/user', UserController::class);
+    route::post('/user/{user}/consignment', [UserController::class, 'consignment'])->name('user.consignment.store');
 });
 
 Route::get('/test', function () {

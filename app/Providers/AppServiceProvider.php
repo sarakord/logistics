@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\City;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,5 +23,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+
+        view()->composer(['Admin.consignment.createOrEdit', 'Admin.user.createOrEdit', 'Admin.motorcycle.createOrEdit'], function ($view) {
+            $view->with('cities', City::active()->get());
+        });
     }
 }

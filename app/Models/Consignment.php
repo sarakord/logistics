@@ -15,4 +15,27 @@ class Consignment extends Model
     {
         return $this->belongsTo(Motorcycle::class);
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function getLocationAttribute()
+    {
+        $downtown = $this->customer?->city?->downtown;
+        return $downtown->lat.','.$downtown->long;
+    }
+
+    public function getCustomerLocationAttribute()
+    {
+        $customer = $this->customer;
+        return $customer->lat.','.$customer->long;
+    }
+
+    public function getCityAttribute()
+    {
+        $city = $this->customer?->city;
+        return $city->name;
+    }
 }

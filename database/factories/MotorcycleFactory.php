@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -17,10 +18,12 @@ class MotorcycleFactory extends Factory
      */
     public function definition(): array
     {
+        $cities = City::active()->get()->pluck('id')->toArray();
         return [
             'driver' => fake()->name(),
             'license_plate' => fake()->unique()->bothify('#######'),
             'in_downtown' => fake()->boolean(),
+            'city_id' => fake()->randomElement($cities),
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\City;
 use App\Models\User;
 use App\Repositories\UserRepository;
+use http\Url;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -28,8 +29,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $cities = City::active()->get();
-        return view('Admin.user.createOrEdit', ['cities' => $cities]);
+        return view('Admin.user.createOrEdit');
     }
 
     public function store(UserRequest $request)
@@ -41,8 +41,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $cities = City::active()->get();
-        return view('Admin.user.createOrEdit', compact('user', 'cities'));
+        return view('Admin.user.createOrEdit', compact('user'));
     }
 
     public function update(UserRequest $request, User $user)
@@ -59,5 +58,11 @@ class UserController extends Controller
     {
         $this->repository->delete($user);
         return redirect()->route('user.index')->with('success', 'Deleted successfully');
+    }
+
+    public function consignment(User $user)
+    {
+        $consignment = $user->consignment()->create(['city_id' => $user->city_id]);
+        return redirect()->route('consignment.edit', $consignment);
     }
 }

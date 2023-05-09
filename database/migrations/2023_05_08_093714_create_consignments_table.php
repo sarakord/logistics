@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('consignments', function (Blueprint $table) {
             $table->id();
+            $table->tinyInteger('status')->default(1);
+            $table->text('description')->nullable();
+
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
+
+            $table->unsignedBigInteger('motorcycle_id')->nullable();
+            $table->foreign('motorcycle_id')->references('id')->on('motorcycles')->nullOnDelete();
+
             $table->timestamps();
         });
     }

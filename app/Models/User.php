@@ -50,4 +50,9 @@ class User extends Authenticatable
         return $this->belongsTo(City::class);
     }
 
+    public function consignment()
+    {
+        return $this->hasMany(Consignment::class);
+    }
+
 }
